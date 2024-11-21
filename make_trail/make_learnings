@@ -1,0 +1,136 @@
+Let's break down this specific line from your `Makefile`:
+
+```makefile
+# Rule to compile .c files into .o object files
+%.o: %.c header.h
+	$(CC) $(CFLAGS) -c $< -o $@
+```
+
+### Explanation:
+
+This is a **pattern rule** in `Makefile` syntax. Pattern rules are a way to specify how to build files of a certain type using a common rule. 
+
+#### Rule Breakdown:
+
+1. **`%.o: %.c header.h`**:
+   - `%.o` and `%.c` are **pattern placeholders**. The `%` symbol is a wildcard that matches any filename.
+   - The rule says: *"For any `.o` file, look for a corresponding `.c` file with the same name (e.g., `file1.c` → `file1.o`) and compile it."*
+   - The `header.h` is also listed here as a dependency, meaning that if `header.h` changes, `make` will recompile the `.c` file into `.o`. This ensures the object files are recompiled if the header file is modified.
+
+   **Example**: If you have `file1.c` and `file1.o`, this rule says:
+   - To create `file1.o`, `make` will use `file1.c` (and `header.h` as a dependency).
+
+2. **`$(CC) $(CFLAGS) -c $< -o $@`**:
+   - **`$(CC)`**: This is the compiler (`gcc` in your case, or whatever is specified by the `CC` variable).
+   - **`$(CFLAGS)`**: These are the compiler flags (like `-Wall -g` for warnings and debugging information).
+   - **`-c`**: This tells the compiler to **compile** the `.c` file into an object file (`.o`), but not to link it into an executable.
+   - **`$<`**: This is an automatic variable in `make`. It represents the **first prerequisite** in the rule (in this case, the `.c` file). So, `$<` will be replaced by the corresponding `.c` file (like `file1.c`).
+   - **`-o $@`**: This specifies the **output file**. `$@` is another automatic variable that refers to the target of the rule (in this case, the `.o` file). So, if the target is `file1.o`, `$@` will be replaced by `file1.o`.
+
+   The command `$(CC) $(CFLAGS) -c $< -o $@` will then compile the corresponding `.c` file into the `.o` file.
+
+   **Example**:
+   - If the rule is triggered for `file1.c`, the command `gcc -Wall -g -c file1.c -o file1.o` will run.
+
+### In Summary:
+
+- **Pattern rule**: This rule defines how to compile any `.c` file into a `.o` (object) file. The pattern `%.o: %.c` means "For any `.o` target, there should be a corresponding `.c` file".
+  
+- **`$<` and `$@`**: These are **automatic variables**. `$<` refers to the first prerequisite (the `.c` file), and `$@` refers to the target (the `.o` file).
+  
+- **Dependencies**: The `header.h` is listed as a dependency, meaning that any change to `header.h` will trigger recompilation of the `.c` files.
+
+#### Example of the rule in action:
+
+If you have the following files:
+- `file1.c`
+- `file2.c`
+- `header.h`
+
+Then running `make` would:
+1. Compile `file1.c` into `file1.o` (using `header.h` as a dependency).
+2. Compile `file2.c` into `file2.o` (again using `header.h`).
+
+This rule allows you to define how to compile any `.c` file into its corresponding `.o` file, without having to write individual rules for each `.c` file.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+The line `OBJ = $(SRC:.c=.o)` is a **pattern substitution** in `Makefile` syntax.
+
+- `SRC` is a list of the source files, e.g., `file1.c file2.c file3.c`.
+- `$(SRC:.c=.o)` tells `make` to replace the `.c` extension with `.o` for each file in the `SRC` list.
+
+So, this line converts:
+- `file1.c` → `file1.o`
+- `file2.c` → `file2.o`
+- `file3.c` → `file3.o`
+
+As a result, the `OBJ` variable will hold the list of object files (`file1.o file2.o file3.o`), which are the intermediate files needed for linking the final executable.
+
+### In summary:
+- **Before**: `SRC = file1.c file2.c file3.c`
+- **After**: `OBJ = file1.o file2.o file3.o`
+
+This is a shorthand way to generate object files from corresponding source files.
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Let's break down the lines you've highlighted in the `Makefile`.
+
+### `all: $(EXEC)`
+
+- **`all`** is a **target** in the `Makefile`. In a `Makefile`, targets are usually the files or tasks you want to build or perform.
+- **`$(EXEC)`** is the **dependency** for the `all` target. It refers to the final executable file you want to create (defined by `EXEC = program`).
+  
+So, this line means: *"When you run `make`, it will try to build the target `all`, which depends on the target `$(EXEC)` (in this case, `program`).*
+
+In other words:
+- When you run `make` without specifying a target, `make` will look for the default target, which in this case is `all`. 
+- Since `all` depends on `$(EXEC)` (i.e., `program`), `make` will then attempt to build the `program` executable.
+
+---
+
+### `$(EXEC): $(OBJ)`
+
+- This line defines a **rule** for how to build the target `$(EXEC)` (the executable). It says that to create `$(EXEC)`, it depends on the object files `$(OBJ)` (i.e., the `.o` files). 
+- **`$(OBJ)`** is a variable that holds the list of object files (`file1.o`, `file2.o`, `file3.o`), which are compiled from the source files (`file1.c`, `file2.c`, `file3.c`).
+  
+This means that **`$(EXEC)`** (the executable) can only be created if **the object files** are up-to-date (i.e., compiled from the `.c` files).
+
+---
+
+### `$(CC) $(OBJ) -o $(EXEC)`
+
+- **`$(CC)`** refers to the **compiler** (in this case, `gcc`), as defined earlier in the `Makefile`.
+- **`$(OBJ)`** is the list of object files (like `file1.o file2.o file3.o`).
+- **`-o $(EXEC)`** tells the compiler to output the final result to the file `$(EXEC)` (in this case, `program`).
+
+So, this line is the **linking step**: it links all the object files into the final executable `$(EXEC)`.
+
+In full:
+- The rule says: *To create the final executable (`program`), run the compiler on the object files and output the result to the executable file `program`.*
+
+---
+
+### Full Explanation of These Lines:
+
+```makefile
+all: $(EXEC)
+```
+- When `make` is run, it will first check if the target `$(EXEC)` (which is `program`) is up-to-date.
+  
+```makefile
+$(EXEC): $(OBJ)
+	$(CC) $(OBJ) -o $(EXEC)
+```
+- To create the `program` executable (`$(EXEC)`), `make` will use the compiler (`$(CC)`) and link together all the object files (`$(OBJ)`). The resulting executable will be named `program`.
+
+### Recap:
+
+- `all: $(EXEC)` means that the default target `all` depends on the executable `$(EXEC)`, which is `program` in this case.
+- `$(EXEC): $(OBJ)` means that the executable depends on the object files (`$(OBJ)`).
+- The command `$(CC) $(OBJ) -o $(EXEC)` links the object files into the final executable `program`.
+------------------------------------------------------------------------------------------------------------------------------------------
