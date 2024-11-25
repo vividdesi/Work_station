@@ -2,12 +2,12 @@
 #ifndef HEADER_FILE_H
 #define HEADER_FILE_H
 
-static inline int add(int a, int b) {
-    return a + b;
+void add(int a, int b) {
+    printf("The addition value is %d\n", a + b);
 }
 
-static inline int sub(int a, int b) {
-    return a - b;
+void sub(int a, int b) {
+    printf("The subtraction value is %d\n", a - b);
 }
 
 #endif
