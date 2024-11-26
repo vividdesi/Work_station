@@ -1,0 +1,27 @@
+creating obj files ->
+ gcc -c lib_add.c lib_sub.c -fpic
+ 
+ 
+ creating dynamic lib by using obj files->
+ gcc *.o -shared -o lib_cal.so
+ 
+ 
+ linking dynamic library to excutable file->
+ 
+ gcc main.c -o main -L. -l_cal
+ 
+ there may be an error of crsting of obl file of main
+ 
+ to solve this we can use
+ gcc -c main.c main.o
+ 
+ there are 2 methods to solve errors ->
+ 
+ I)cp dyn_lib into the root folder
+    sudo cp lib_cal.so /usr/lib
+    
+ II)u can use export cmd
+    
+    first->use pwd to copy the directory location
+    second_>use export LD_LIBRARY_PATH=:PWD
+ 
