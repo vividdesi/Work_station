@@ -1,0 +1,4 @@
+cmake -H. -B{directory_name}
+
+-H ->current directory
+-B->buld directory
