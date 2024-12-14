@@ -1,0 +1,56 @@
+### **Void Pointer in C - Key Points**
+
+1. **Definition**:  
+   A void pointer (`void *`) is a generic pointer in C that can store the address of any data type (int, float, char, etc.).
+
+2. **Key Characteristics**:
+   - It does not have a type associated with it.
+   - It is used for generic programming and dynamic memory allocation.
+
+3. **Typecasting**:
+   - You cannot directly dereference a void pointer because the compiler does not know the type or size of the data.
+   - It must be explicitly typecast to the appropriate pointer type before dereferencing.  
+   Example:  
+   ```c
+   int num = 42;
+   void *ptr = &num;
+   printf("%d\n", *(int *)ptr); // Correct usage
+   ```
+
+4. **Use Cases**:
+   - **Dynamic Memory Allocation**:
+     Functions like `malloc` and `calloc` return void pointers.  
+     ```c
+     int *arr = (int *)malloc(5 * sizeof(int));
+     ```
+   - **Generic Programming**:
+     Useful in functions that work with different data types (e.g., comparison functions in `qsort`).
+
+5. **Limitations**:
+   - No pointer arithmetic (e.g., `ptr++`) is allowed with void pointers, as the data size is unknown.
+   - Incorrect typecasting may lead to undefined behavior.
+
+6. **Size**:
+   - The size of a void pointer is the same as any other pointer type on a given system (usually 4 bytes on 32-bit systems, 8 bytes on 64-bit systems).
+
+---
+
+### **Quick Example**
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int num = 100;
+    void *ptr = &num; // Void pointer storing address of int
+    printf("Value: %d\n", *(int *)ptr); // Typecast to int* for dereferencing
+    return 0;
+}
+```
+
+---
+
+### **Important Notes**:
+- Void pointers provide flexibility but require careful typecasting.
+- They are commonly used in memory management and generic functions.
+- Always cast to the correct data type to avoid runtime errors.
