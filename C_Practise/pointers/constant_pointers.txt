@@ -1,0 +1,63 @@
+---
+
+### **Pointer to Constant (`const <data_type>*`)**
+- **Definition**: A pointer that points to a constant data type. The data it points to cannot be modified,
+  but the pointer itself can point to different memory locations.
+- **Syntax**: `const <data_type>* <pointer_name>;`
+- **Key Concept**: The `const` applies to the **data** being pointed to, **not the pointer**.
+- **What Can Be Done**:
+  - The pointer can point to different variables.
+  - The data being pointed to **cannot** be modified.
+- **Example**:
+  ```c
+  int x = 10;
+  const int* ptr = &x;
+  // *ptr = 20;  // Error: Cannot modify the data
+  ptr = &y;  // Valid: Can point to another variable
+  ```
+
+---
+
+### **Constant Pointer (`<data_type>* const`)**
+- **Definition**: A constant pointer that points to a data type. The pointer itself cannot change its address, 
+  but the data it points to can be modified.
+- **Syntax**: `<data_type>* const <pointer_name>;`
+- **Key Concept**: The `const` applies to the **pointer** itself, **not the data**.
+- **What Can Be Done**:
+  - The data being pointed to can be modified.
+  - The pointer itself **cannot** point to another memory location.
+- **Example**:
+  ```c
+  int x = 10;
+  int* const ptr = &x;
+  *ptr = 20;  // Valid: Can modify the data
+  ptr = &y;   // Error: Cannot change the address
+  ```
+
+---
+
+### **Combined Example (Constant Pointer to Constant Data)**
+- **Definition**: A pointer that cannot change the address, and the data it points to cannot be modified.
+- **Syntax**: `const <data_type>* const <pointer_name>;`
+- **Example**:
+  ```c
+  const int* const ptr = &x;
+  // *ptr = 20;  // Error: Cannot modify the data
+  // ptr = &y;   // Error: Cannot change the address
+  ```
+
+---
+
+### **Summary Comparison**
+
+| **Feature**                     | **Pointer to Constant**                             | **Constant Pointer**                                           |
+|----------------------------------|-----------------------------------------------------|---------------------------------------------------------------|
+| **Where `const` is applied**     | To the **data** being pointed to.                   | To the **pointer** itself.                                     |
+| **Can the pointer be changed?**  | Yes, it can point to a different memory address.    | No, the pointer must always point to the same address.         |
+| **Can the data be modified?**    | No, the data the pointer points to cannot be modified. | Yes, the data the pointer points to can be modified.           |
+| **Syntax**                       | `const <data_type>* <pointer_name>;`                 | `<data_type>* const <pointer_name>;`                            |
+| **Example**                      | `const int* ptr = &x;`                              | `int* const ptr = &x;`                                         |
+
+---
+
+These notes provide a clear understanding of the differences between **Pointer to Constant** and **Constant Pointer** in C programming.
