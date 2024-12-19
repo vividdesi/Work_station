@@ -1,0 +1,8 @@
+Restore deleted or modified files to their last committed state: git restore <file>
+Remove deleted files from Git tracking: git rm --cached <file>
+Permanently delete untracked files: rm <file>
+Stop tracking untracked files: git clean -f <file>
+
+git add <file>
+git commit -m"comments"
+git push
