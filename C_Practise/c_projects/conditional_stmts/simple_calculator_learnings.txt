@@ -1,0 +1,113 @@
+In simple calculator project -
+
+*The Problem
+If you use scanf to read an integer (%d) or other input, it stops reading as soon as it encounters whitespace (like a space or a newline)
+and leaves the remaining characters, including the newline (\n), in the buffer.
+
+When you later use scanf to read a character (%c), it doesn't wait for new input. Instead, it reads the leftover newline (\n) from the buffer.
+
+This causes the program to behave unexpectedly because:
+
+The %c specifier picks up the \n instead of waiting for actual user input.
+As a result, your char variable ends up storing the newline character rather than the intended input.
+
+solution:
+### Handling Input Issues in C (`scanf` and Input Buffer)
+
+When using `scanf` in C, you may encounter issues where leftover characters (like newline `\n`) in the input buffer cause unexpected behavior. This happens particularly when reading characters (`%c`) after integers (`%d`). Below are solutions to overcome this issue:
+
+---
+
+### **Why This Happens**
+- `scanf` stops reading input when it encounters whitespace (e.g., space, tab, newline).
+- Leftover characters, such as the newline (`\n`) from previous input, remain in the buffer.
+- When using `%c`, `scanf` reads the leftover `\n` instead of waiting for new input.
+
+---
+
+### **Solutions**
+
+#### **1. Add Space Before `%c` in `scanf`**
+- Adding a space before `%c` skips any leading whitespace in the buffer.
+- **Usage**: `scanf(" %c", &c);`
+
+**Example:**
+```c
+int a;
+char c;
+scanf("%d", &a); // Reads integer
+scanf(" %c", &c); // Skips leftover whitespace and reads the character
+```
+
+---
+
+#### **2. Manually Clear the Input Buffer**
+- Use a loop with `getchar()` to remove leftover characters from the buffer.
+- **Usage**:
+```c
+while (getchar() != '\n'); // Clears all characters until the newline
+```
+
+**Example:**
+```c
+int a;
+char c;
+scanf("%d", &a); // Reads integer
+while (getchar() != '\n'); // Clears buffer
+scanf("%c", &c); // Reads character
+```
+
+---
+
+#### **3. Use `getchar` for Character Input**
+- Use `getchar` for character input instead of `scanf`.
+- Make sure to clear the buffer before calling `getchar`.
+
+**Example:**
+```c
+int a;
+char c;
+scanf("%d", &a); // Reads integer
+getchar(); // Clears the newline character
+c = getchar(); // Reads character input
+```
+
+---
+
+#### **4. Read Input as Strings and Parse**
+- Read the entire input as a string using `fgets` and then parse it using `sscanf`.
+- Useful for handling multiple inputs in one line.
+
+**Example:**
+```c
+char buffer[100];
+int a;
+char c;
+fgets(buffer, sizeof(buffer), stdin); // Reads the entire line
+sscanf(buffer, "%d %c", &a, &c); // Parses integer and character
+```
+
+---
+
+#### **5. Avoid Using `fflush(stdin)`**
+- `fflush(stdin)` is **non-standard** and may cause undefined behavior.
+- It works in some compilers but is not portable.
+
+---
+
+### **Recommended Approach**
+1. **Simplest**: Add a space before `%c`:
+   ```c
+   scanf(" %c", &c);
+   ```
+2. **Robust**: Manually clear the buffer:
+   ```c
+   while (getchar() != '\n');
+   ```
+
+---
+
+### **Key Points**
+- Always handle leftover characters in the buffer when switching input types.
+- Avoid relying on non-standard methods like `fflush(stdin)`.
+- For more complex input handling, consider using `fgets` and `sscanf`.

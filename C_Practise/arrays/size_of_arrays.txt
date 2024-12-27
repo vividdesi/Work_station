@@ -1,0 +1,17 @@
+### Notes: `int size = sizeof(a) / sizeof(a[0])`
+
+1. **Purpose**: Calculate the number of elements in a static array.
+
+2. **How it works**:
+   - `sizeof(a)`: Total size of the array in bytes.
+   - `sizeof(a[0])`: Size of one element in the array.
+   - Division gives the number of elements:  
+     `size = total size / size of one element`.
+
+3. **Example**:
+   ```c
+   int a[] = {1, 2, 3, 4, 5};
+   int size = sizeof(a) / sizeof(a[0]); // size = 5
+   ```
+
+4. **Key Limitation**: Only works for static arrays, not for pointers or dynamic arrays.
