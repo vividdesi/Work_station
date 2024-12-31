@@ -6,3 +6,64 @@ Stop tracking untracked files: git clean -f <file>
 git add <file>
 git commit -m"comments"
 git push
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+thing to be done if done editing in main git 
+
+The message indicates that Git doesn’t know how you want to handle the divergence between your local branch and
+ the remote branch when you run `git pull`. Git is asking you to specify a strategy for merging or rebasing.
+
+---
+
+### **What’s Happening**
+When branches diverge, Git requires a resolution strategy to synchronize:
+1. **Merge** (default behavior): Combines the changes, preserving both commit histories.
+2. **Rebase**: Re-applies your local commits on top of the remote commits.
+3. **Fast-Forward Only**: Pull only if the remote branch is ahead and no merge is needed.
+
+---
+
+### **How to Resolve**
+#### **Option 1: Merge (Default Strategy)**
+To perform a merge, set Git to use the merge strategy:
+```bash
+git config pull.rebase false
+git pull
+```
+
+---
+
+#### **Option 2: Rebase**
+To use rebase for resolving divergence:
+```bash
+git config pull.rebase true
+git pull
+```
+
+---
+
+### **Global vs Local Configuration**
+- **For All Repositories**: Add the `--global` flag to apply the configuration globally:
+  ```bash
+  git config --global pull.rebase false
+  ```
+- **For Current Repository Only**: Omit the `--global` flag:
+  ```bash
+  git config pull.rebase false
+  ```
+
+---
+
+### **Recommendation**
+If you're unsure:
+- Start with **merge** (default strategy): 
+  ```bash
+  git config pull.rebase false
+  git pull
+  ```
+- If you prefer cleaner commit histories in the long term, switch to **rebase**:
+  ```bash
+  git config pull.rebase true
+  git pull
+  ```
+--------------------------------------------------------------------------------------------------------------------------------
