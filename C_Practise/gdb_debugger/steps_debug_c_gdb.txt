@@ -1,0 +1,122 @@
+### **Debugging in C Programming (Simplified Notes)**
+
+**Debugging:**  
+The process of finding and fixing errors in a program (syntax errors, logical errors, runtime errors, etc.).
+
+---
+
+### **Steps to Debug a C Program in Ubuntu Terminal**
+
+#### **1. Install GDB**
+   - Use the terminal to install GNU Debugger (GDB):  
+     ```bash
+     sudo apt install gdb
+     ```
+
+#### **2. Compile with Debugging Information**
+   - Add the `-g` flag during compilation to include debugging details:  
+     ```bash
+     gcc -g -o program_name program_name.c
+     ```
+
+#### **3. Start Debugging with GDB**
+   - Run the program in GDB:  
+     ```bash
+     gdb ./program_name
+     ```
+
+#### **4. Set Breakpoints**
+   - Pause the program at specific lines or functions to inspect execution:  
+     ```bash
+     break line_number
+     ```
+   - Example:  
+     ```bash
+     break 10  # Sets a breakpoint at line 10
+     ```
+
+#### **5. Run the Program**
+   - Start execution inside GDB:  
+     ```bash
+     run
+     ```
+
+#### **6. Step Through the Program**
+   - Use these commands to control execution:
+     - `next` (`n`): Go to the next line of code.  
+     - `step` (`s`): Step into functions to debug them.  
+     - `continue` (`c`): Resume execution until the next breakpoint.  
+     - `finish`: Finish the current function and return.
+
+#### **7. Inspect Variables**
+   - Use `print` to check the value of variables:  
+     ```bash
+     print variable_name
+     ```
+
+#### **8. View the Call Stack**
+   - Use `backtrace` to see the sequence of function calls:  
+     ```bash
+     backtrace
+     ```
+
+#### **9. Exit GDB**
+   - Quit the debugger:  
+     ```bash
+     quit
+     ```
+
+---
+
+### **Example Debugging Workflow**
+
+1. Write the program:
+   ```c
+   #include <stdio.h>
+
+   int main() {
+       int a = 10, b = 0;
+       printf("Result: %d\n", a / b);  // Division by zero error
+       return 0;
+   }
+   ```
+
+2. Compile it:  
+   ```bash
+   gcc -g -o example example.c
+   ```
+
+3. Debug it:  
+   ```bash
+   gdb ./example
+   ```
+
+4. Set a breakpoint at line 5:  
+   ```bash
+   break 5
+   ```
+
+5. Run the program:  
+   ```bash
+   run
+   ```
+
+6. Check variables:  
+   ```bash
+   print a
+   print b
+   ```
+
+7. Analyze and fix errors.
+
+---
+
+### **Tips**
+- Use `valgrind` for memory-related debugging:  
+  ```bash
+  valgrind ./program_name
+  ```
+- Add `printf` for quick checks in small programs.
+- Debug one issue at a time for simplicity.
+
+These steps provide a straightforward way to debug C programs in Ubuntu using GDB.

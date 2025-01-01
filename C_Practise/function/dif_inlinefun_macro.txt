@@ -1,0 +1,77 @@
+### **Difference Between Inline Functions and Macros**
+
+#### **1. Macros**
+- **Definition:**  
+  Preprocessor directives used for text substitution before compilation.  
+  Example:  
+  ```c
+  #define SQUARE(x) ((x) * (x))
+  ```
+
+- **Characteristics:**  
+  - Processed by the preprocessor (text replacement).  
+  - No type checking.  
+  - Can cause unintended behavior due to side effects.  
+
+- **Advantages:**  
+  - No function call overhead.  
+  - Useful for constants and conditional compilation.  
+
+- **Disadvantages:**  
+  - No scope or type checking, leading to potential bugs.  
+  - Difficult to debug as they don’t appear in the stack trace.  
+  - Increases code size due to repeated expansion (code bloat).  
+
+---
+
+#### **2. Inline Functions**
+- **Definition:**  
+  Functions suggested to the compiler for inline substitution of the function body.  
+  Example:  
+  ```c
+  inline int square(int x) {
+      return x * x;
+  }
+  ```
+
+- **Characteristics:**  
+  - Handled by the compiler (not guaranteed to be inlined).  
+  - Type checking is done like regular functions.  
+  - Scoped and follows normal function rules.  
+
+- **Advantages:**  
+  - Type-safe and debuggable.  
+  - Reduces side effects compared to macros.  
+  - Optimized by the compiler for efficiency.  
+
+- **Disadvantages:**  
+  - May increase code size if used excessively.  
+  - Slightly more verbose than macros.
+
+---
+
+### **Comparison Table**
+
+| **Feature**        | **Macros**                        | **Inline Functions**              |
+|---------------------|------------------------------------|------------------------------------|
+| **Definition**      | Preprocessor directive (`#define`).| Function with `inline` keyword.   |
+| **Type Checking**   | Not performed.                   | Performed.                        |
+| **Scope**           | No scope, global substitution.   | Follows function scope.           |
+| **Debugging**       | Hard to debug (text replaced).    | Easier to debug (function body).  |
+| **Side Effects**    | Prone to side effects.            | Less prone to side effects.       |
+| **Efficiency**      | No function call overhead.        | Optimized by the compiler.        |
+| **Use Cases**       | Constants, conditional code.      | Type-safe reusable code blocks.   |
+
+---
+
+### **Which is Better?**
+1. **Use Inline Functions:**
+   - For reusable and type-safe code.  
+   - When debugging and maintenance are required.  
+
+2. **Use Macros:**
+   - For constants (though `const` or `enum` is preferred).  
+   - For conditional compilation (`#ifdef`, `#define`).  
+
+#### **Recommendation:**  
+Prefer **inline functions** in modern C/C++ programming for safety, maintainability, and debugging. Use macros sparingly for specific use cases.
