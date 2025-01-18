@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/execute.dir/main.c.o CMakeFiles/execute.dir/function.c.o -o BIN/execute 

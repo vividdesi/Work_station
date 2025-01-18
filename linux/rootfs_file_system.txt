@@ -1,0 +1,22 @@
+Here’s a simple and clear table outlining the parts of a **Root File System (Rootfs)**:
+
+| **Part/Directory** | **Purpose**                                                                                 | **Example Contents**                           |  
+|---------------------|---------------------------------------------------------------------------------------------|-----------------------------------------------|  
+| `/bin`              | Stores essential system binaries (commands available for all users).                       | `ls`, `cp`, `mv`, `cat`, etc.                 |  
+| `/sbin`             | Contains system binaries (commands mostly for administrators).                             | `ifconfig`, `mount`, `fsck`, etc.             |  
+| `/etc`              | Stores configuration files for the system and applications.                                | `passwd`, `fstab`, `hosts`, `network` configs |  
+| `/lib`              | Houses shared libraries needed by binaries in `/bin` and `/sbin`.                         | `libc.so`, `ld-linux.so`, etc.                |  
+| `/dev`              | Contains device files that represent hardware like disks, serial ports, etc.               | `tty1`, `sda`, `null`, etc.                   |  
+| `/proc`             | Virtual file system providing system and process information in real-time.                 | `cpuinfo`, `meminfo`, `uptime`                |  
+| `/sys`              | Virtual file system providing hardware and kernel information.                             | Device attributes, kernel modules, etc.       |  
+| `/tmp`              | Temporary directory for files created by processes during runtime.                         | Temporary data (deleted on reboot).           |  
+| `/usr`              | Secondary hierarchy for user-installed applications and libraries.                         | `/usr/bin`, `/usr/lib`, etc.                  |  
+| `/var`              | Contains variable data like logs, caches, and runtime data.                                | Log files, databases, PID files.              |  
+| `/home`             | Stores personal files and settings for users (not always present in minimal rootfs).       | User directories like `/home/user1`.          |  
+| `/mnt` or `/media`  | Temporary mount points for external devices (e.g., USB drives).                            | Mounted storage devices.                      |  
+
+### Key Points:
+- **Minimal Rootfs**: Often includes just `/bin`, `/sbin`, `/etc`, `/lib`, `/dev`, and `/proc`.
+- **Embedded Systems**: Rootfs is kept as small as possible to save space, focusing only on necessary components.
+
+

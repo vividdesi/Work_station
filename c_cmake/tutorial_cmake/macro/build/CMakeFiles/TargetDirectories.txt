@@ -1,0 +1,3 @@
+/home/rahul/Workstation/Work_station/c_cmake/tutorial_cmake/macro/build/CMakeFiles/executable.dir
+/home/rahul/Workstation/Work_station/c_cmake/tutorial_cmake/macro/build/CMakeFiles/edit_cache.dir
+/home/rahul/Workstation/Work_station/c_cmake/tutorial_cmake/macro/build/CMakeFiles/rebuild_cache.dir

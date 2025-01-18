@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/executable.dir/main.c.o -o executable  -Wl,-rpath,/home/rahul/Workstation/Work_station/c_cmake/tutorial_cmake/lib/dynamic/build libcalc.so 

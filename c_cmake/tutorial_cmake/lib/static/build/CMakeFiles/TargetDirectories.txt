@@ -1,0 +1,4 @@
+/home/rahul/Workstation/Work_station/c_cmake/tutorial_cmake/lib/static/build/CMakeFiles/calc.dir
+/home/rahul/Workstation/Work_station/c_cmake/tutorial_cmake/lib/static/build/CMakeFiles/executable.dir
+/home/rahul/Workstation/Work_station/c_cmake/tutorial_cmake/lib/static/build/CMakeFiles/edit_cache.dir
+/home/rahul/Workstation/Work_station/c_cmake/tutorial_cmake/lib/static/build/CMakeFiles/rebuild_cache.dir
