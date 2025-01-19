@@ -1,0 +1,8 @@
+source sources/poky/oe-init-build-env 
+
+bitbake
+
+bitbake-layers --help
+
+bitbake-layers create-layer meta-rahul
+
