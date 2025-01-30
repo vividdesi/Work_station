@@ -1,0 +1,44 @@
+You can stop Docker containers using the `docker stop` command. Here’s how you can do it:
+
+---
+
+1. Stop a Specific Running Container**
+```bash
+docker stop <container_id_or_name>
+```
+- Replace `<container_id_or_name>` with the container's ID or name.
+- Example:
+  ```bash
+  docker stop my_container
+  ```
+
+2. Stop Multiple Containers at Once**
+You can specify multiple container IDs or names in one command:
+```bash
+docker stop <container1_id_or_name> <container2_id_or_name>
+```
+Example:
+```bash
+docker stop container1 container2
+```
+3. Stop All Running Containers**
+Use the following command to stop all running containers:
+```bash
+docker stop $(docker ps -q)
+```
+- `docker ps -q` lists the IDs of all running containers.
+- `$(...)` passes those IDs to the `docker stop` command.
+
+4. Confirm Containers are Stopped**
+After stopping containers, you can verify using:
+```bash
+docker ps
+```
+If no containers are running, the output will be empty.
+
+5. Force Stop Containers**
+If a container does not stop gracefully, use the `docker kill` command:
+```bash
+docker kill <container_id_or_name>
+```
+- This forcefully stops the container by sending a `SIGKILL` sign
