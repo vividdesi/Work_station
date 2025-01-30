@@ -1,0 +1,84 @@
+what is docker ?
+
+     ->	docker is a software platform for building applications .
+
+Docker image :-
+	
+     ->	docker image is read-only template that contains a set of instructions for creating a container that can run on the docker platform.
+
+Docker container:-
+
+	
+HOW TO CREATE A DOCKER:-
+------------------------
+
+step 1:remove docker related packages
+	
+	sudo apt-get remove docker docker-engine docker.io
+
+step 2:update the pakages
+
+	sudo apt-get update
+
+step 3:install docker
+
+	sudo apt-get install docker-ce
+
+	or
+	sudo apt install docker.io
+	sudo snap install docker
+step 4:first create doker file
+
+	vim dockerfile
+step 5:built the image
+
+	docker build -t <new name> .(for current directory/path will be given)
+
+step 6:run the file
+
+	docker run hello-world
+
+step 7:check it in                                          images will be there in
+
+	docker ps -a                                               docker images
+
+step 8:for docker container
+
+	docker run -it <name> bash
+
+
+if we want to change permissions
+
+	man usermod
+	sudo usermod -aG docker <user.name>
+	exec su -l <user.name>
+
+STOP A CONTAINER 
+
+	docker stop <container.iD>
+
+REMOVE CONTAINER ID :1 ->stop container 2 ->remove container
+		
+		docker rm <container.id>
+
+
+HOW TO SHARE DOCKER IMAGES ONE PC TO ANOTHER PC
+************************************************
+
+step 1:create tar file
+
+        docker save -o <tar file  name> <image name>
+        (EX: docker save -o ubuntu.tar hello-world)
+
+step 2:send the tar file
+
+        scp <tar file name> <host name of pc>@<ip address>:/<path>                            ip address:ifconfig
+        (EX:scp ubuntu.tar sam@192.168.1.3:/home/sam/viyara/gar)
+
+step 3:in another pc or machine
+
+        docker load -i <tar file name>
+        (EX: docker load -i ubuntu.tar)
+
+
+

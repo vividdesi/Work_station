@@ -1,0 +1,66 @@
+# Use Ubuntu 18.04 as the base image
+FROM ubuntu:18.04
+
+# Update package list, install necessary packages, and add universe repository
+RUN apt-get update \
+    && apt-get install -y sudo locales software-properties-common curl \
+    && add-apt-repository universe \
+    && apt-get update \
+    && apt-get install -y \
+        wget cpio zstd build-essential gcc make chrpath diffstat gawk git-core unzip \
+        texinfo gcc-multilib socat libsdl1.2-dev xterm perl python3 python3-pip \
+        python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 \
+        python3-subunit zstd liblz4-tool file libacl1 vim \
+        qemu-utils curl \
+        libgtk2.0-0 libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Generate the en_US.UTF-8 locale
+RUN locale-gen en_US.UTF-8 \
+    && update-locale LANG=en_US.UTF-8
+
+# Set environment variables for locale
+ENV LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8
+
+# Add a new user 'Yocto_Touter' with home directory and bash shell, set password
+RUN useradd -m -s /bin/bash yoctotutor \
+    && echo "yoctotutor:p" | chpasswd \
+    && usermod -aG sudo yoctotutor
+
+# Install lz4 from source
+RUN wget https://github.com/lz4/lz4/archive/refs/tags/v1.9.3.tar.gz -O lz4.tar.gz \
+    && tar -xzf lz4.tar.gz \
+    && cd lz4-1.9.3 \
+    && make \
+    && make install \
+    && cd .. \
+    && rm -rf lz4-1.9.3 lz4.tar.gz
+
+# Create Yocto directory and set permissions for the 'Yocto_Touter' user
+RUN mkdir -p /home/yocto && chown yoctotutor:yoctotutor /home/yocto
+
+# Switch to the 'Yocto_Touter' user
+USER yoctotutor
+
+# Set the working directory
+WORKDIR /home/yocto
+
+# Switch to bash shell for all subsequent RUN commands
+SHELL ["/bin/bash", "-c"]
+
+# Initialize Yocto environment with MYiR source using Git
+RUN mkdir -p /home/yoctotutor/yocto-imx6 \
+    && mkdir ~/bin \
+    && curl http://commondatastorage.googleapis.com/git-repo-downloads/repo  > ~/bin/repo \
+    && chmod a+x ~/bin/repo \
+    && PATH=${PATH}:~/bin \
+    && cd /home/yoctotutor/yocto-imx6 \
+    && repo init -u https://github.com/viyaraembedded/viyara-imx-manifest.git --no-clone-bundle --depth=1 -m viyara-i.mx6ul-5.10.9-1.0.0.xml -b i.MX6UL-5.10-gatesgarth 
+ \
+    && repo sync
+
+# Set the default command to bash
+CMD ["/bin/bash", "-l"]
+
