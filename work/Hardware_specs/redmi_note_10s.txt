@@ -1,0 +1,29 @@
+processer-
+	2xCortex-A76
+	6xCortex-A55
+gpu-
+	Arm Mali-G76 MC4 up to 900MHz
+	Quad core GPU
+	
+APU-
+	1x Mediatek APU
+
+VPU-
+	2xMEdiatek VPU
+
+Storage-
+	UFS 2.1
+	Emmc 5.1
+Ram-
+6 gb
+LPDDR4x
+
+Rom-
+64gb ufs 2.1
+
+Connectivity
+
+Wi-Fi 5 (802.11 a/b/g/n/ac), Bluetooth 5.0, Multi-GNSS options, FM radio
+
+4G LTE
+

@@ -1,0 +1,20 @@
+To start using bitbake you need to source the "oe-init-build-env" script located into poky/ directory. So you should do something like this:
+
+$ cd /path/to/poky
+$ source ./oe-init-build-env
+$ bitbake <recipe>
+
+
+if not worked u can try source ./oe-init-build-env it will worked
+
+cmd to know bitbake-layers
+
+bitbake-layers show-layers
+
+cmd to add bitbake layer
+
+bitbake-layers add-layer ../meta-(there in source dir)/
+
+cmd to remove bitbake layer
+
+bitbake-layers remove-layer meta-(which is present in source dir)

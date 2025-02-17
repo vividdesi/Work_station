@@ -1,0 +1,183 @@
+
+Compilation Errors in C Programming:
+
+1. **Syntax Errors:**
+   - Missing Semicolon:
+     ```c
+     int x = 5   // Missing semicolon
+     ```
+     **Fix**: Add a semicolon at the end of the statement.
+     ```c
+     int x = 5;  // Correct
+     ```
+
+   - Mismatched Parentheses:
+     ```c
+     if (x > 0 {   // Missing closing parenthesis
+         // code
+     }
+     ```
+     **Fix**: Ensure all parentheses are matched properly.
+     ```c
+     if (x > 0) {   // Correct
+         // code
+     }
+     ```
+
+   - Function Declaration Missing Return Type:
+     ```c
+     myFunction() {   // Missing return type
+         // code
+     }
+     ```
+     **Fix**: Declare the return type.
+     ```c
+     void myFunction() {   // Correct
+         // code
+     }
+     ```
+
+2. **Type Errors:**
+   - Undeclared Variable:
+     ```c
+     printf("%d", x);  // Error: 'x' is undeclared
+     ```
+     **Fix**: Declare the variable before using it.
+     ```c
+     int x = 5;
+     printf("%d", x);   // Correct
+     ```
+
+   - Incompatible Types in Assignment:
+     ```c
+     int x = "Hello";  // Error: cannot assign string to an integer
+     ```
+     **Fix**: Use the appropriate type.
+     ```c
+     char* x = "Hello";   // Correct
+     ```
+
+   - Type Mismatch in Function Arguments:
+     ```c
+     void printValue(int num) {
+         printf("%s", num);  // Error: trying to print an integer as a string
+     }
+     ```
+     **Fix**: Ensure the format specifiers match the argument type.
+     ```c
+     void printValue(int num) {
+         printf("%d", num);  // Correct
+     }
+     ```
+
+3. **Linker Errors:**
+   - Function Not Defined:
+     ```c
+     main() {
+         myFunction();  // Error: undefined reference to 'myFunction'
+     }
+     ```
+     **Fix**: Declare and define the function.
+     ```c
+     void myFunction() {
+         // function code
+     }
+     ```
+
+   - Missing Library During Linking:
+     ```bash
+     gcc myprogram.c  // Error: undefined reference to math functions
+     ```
+     **Fix**: Link the required library, like the math library.
+     ```bash
+     gcc myprogram.c -lm   // -lm links the math library
+     ```
+
+4. **Warning Errors:**
+   - Unused Variables:
+     ```c
+     int x = 5;   // Warning: unused variable 'x'
+     ```
+     **Fix**: Either use the variable properly or remove it.
+     ```c
+     printf("%d", x);   // Use the variable
+     ```
+
+   - Implicit Function Declaration:
+     ```c
+     main() {
+         myFunction();    // Warning: implicit declaration of 'myFunction'
+     }
+     ```
+     **Fix**: Declare the function before use.
+     ```c
+     void myFunction();  // Function declaration
+     ```
+
+5. **Memory Errors:**
+   - Dereferencing a NULL Pointer:
+     ```c
+     int* ptr = NULL;
+     *ptr = 10;  // Error: dereferencing NULL pointer
+     ```
+     **Fix**: Ensure the pointer is not NULL before dereferencing.
+     ```c
+     if (ptr != NULL) {
+         *ptr = 10;
+     }
+     ```
+
+   - Array Out-of-Bounds Access:
+     ```c
+     int arr[5];
+     arr[10] = 5;   // Error: out-of-bounds access
+     ```
+     **Fix**: Ensure that you access the array within valid bounds.
+     ```c
+     arr[4] = 5;    // Correct, since array index is from 0 to 4
+     ```
+
+6. **Preprocessor Errors:**
+   - Missing Include Files:
+     ```c
+     #include <nonexistent.h>   // Error: file not found
+     ```
+     **Fix**: Make sure the file exists or use the correct include path.
+     ```c
+     #include <stdio.h>   // Correct include
+     ```
+
+   - Macro Redefinition:
+     ```c
+     #define MAX 100
+     #define MAX 200  // Error: 'MAX' is redefined
+     ```
+     **Fix**: Avoid redefining macros.
+     ```c
+     #ifndef MAX
+     #define MAX 100
+     #endif
+     ```
+
+7. **Undefined Behavior:**
+   - Division by Zero:
+     ```c
+     int x = 10 / 0;   // Error: division by zero
+     ```
+     **Fix**: Ensure there is no division by zero.
+     ```c
+     if (y != 0) {
+         x = 10 / y;    // Correct
+     }
+     ```
+
+   - Using Uninitialized Variables:
+     ```c
+     int x;
+     printf("%d", x);    // Error: using uninitialized variable
+     ```
+     **Fix**: Always initialize variables before using them.
+     ```c
+     int x = 0;
+     printf("%d", x);    // Correct
+     ```

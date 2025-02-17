@@ -1,0 +1,57 @@
+Processer-
+	AMD® Ryzen 3 5300u with radeon graphics × 8
+	Clock speed: 2.6 GHz base, 3.8 GHz max boost
+	Cores: 4
+	Threads: 8
+	L3 cache: 4 MB
+	Typical TDP: 15 W
+
+
+Doubts int the specs -
+
+*TDP (Thermal Design Power) refers to the maximum amount of heat a processor or chip is expected to generate under typical workload conditions
+
+*Threads allow a single core to handle multiple tasks efficiently, improving multitasking and overall performance.
+
+	Example: An 8-core CPU with 16 threads can process 16 instruction sets simultaneously.
+
+*A CPU cache is a small but very fast memory that stores frequently used instructions and data to reduce access time from RAM.
+
+
+GPU-
+
+	Compute Units in Radeon Graphics 384SP
+	6 Compute Units (CUs)
+	Each CU has 64 Stream Processors
+	Total: 6 × 64 = 384 Stream Processors (SPs)
+📌 The "384SP" in Radeon Graphics 384SP means 384 shading units (stream processors), which come from 6 compute units.
+
+	Clock Speeds:
+
+		Base Clock: Operates at 300 MHz.
+		Boost Clock: Can reach up to 1700 MHz under load.
+
+	Power Consumption: Designed with a TDP of 45W.
+
+Process Technology: Manufactured using a 7 nm process.
+
+
+Socket:	AMD Socket FP6
+
+
+Caches-
+	Cache L1:	64 KB (per core)
+	Cache L2:	512 KB (per core)
+	Cache L3:	4 MB (shared)
+
+
+Memory support:
+
+ddr4
+
+8gb ddr4 ram supports upto 16gb
+
+PCI-Express:	Gen 3, 12 Lanes
+(CPU only)
+
+

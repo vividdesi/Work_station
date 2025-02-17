@@ -1,0 +1,24 @@
+*To have information of recipes
+bitbake-layers show-recipes 
+
+*To have any particular information of any package
+bitbake-layers show-recipes python3(any package u want to install)
+
+*findout where is the meta-username of that package 
+  check whether the meta layyer is added or not bblayer (build>conf>bblayers.conf)
+  if meta layer is not there then
+	bitbake-layers add-layer ../meta
+	bitbake-layers add-layer ../meta-layer-name
+
+*to install any package image firt go to the 
+	/home/rahul/yoctotutor/build/conf
+	then open the vim local.conf
+
+	IMAGE_INSTALL:append = " python3"
+	then save it
+
+	in cmd run bitbake core-image-full-cmdline
+
+
+
+

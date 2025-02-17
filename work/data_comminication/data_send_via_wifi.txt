@@ -1,0 +1,10 @@
+In imx8 v2 run wifi script to enable and connect wifi network
+
+1)ssh root@ip address #to run board in the lappy using wifi
+
+how to send the file to the board
+
+2)p -r filename systemname@ipaddress:where u want to save it
+
+
+

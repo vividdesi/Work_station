@@ -1,0 +1,15 @@
+1)lsusb/ df -h  to know the sda1/sda type
+
+2)mkdir /mnt/usb
+
+3)sudo mount /dev/sdb /mnt/usb
+
+4)cd /mnt/usb
+
+5)sudo umount /mnt/usb
+
+
+
+
+
+
