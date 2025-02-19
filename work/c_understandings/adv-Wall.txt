@@ -1,0 +1,6 @@
+By using -Wall, you're enabling a powerful tool that helps you write better, safer, and more maintainable code. It:
+
+*Catches potential bugs and undefined behaviors early,
+*Improves code quality and readability,
+*Helps avoid common mistakes, and
+*Encourages good coding practices.
